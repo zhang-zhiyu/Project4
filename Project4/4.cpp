@@ -16,7 +16,6 @@ int number_int[3];//题目中出现的整数；
 float number_float[3];//题目中出现的小数；
 char symbol[2];//题目中出现的运算符；
 FILE *fp;//需要输出的文件；
-
 /*用户设置函数*/
 void start() {
 	cout << "请输入需要多少道题目：\n";
@@ -55,8 +54,9 @@ void randnumber() {
 /*取随机运算符函数*/
 void randsymbol() {
 	int j = 0;
-	while (j < 3) {
-		int flge = rand() % 4;
+	int flge;
+	while (j < 2) {
+		 flge= rand() %4;
 		switch (flge) {
 		case 0:
 			if (symbol_type[0] == 1) {
@@ -94,7 +94,7 @@ void create_expression1(int i) {
 	}
 	if (decimal == 2) {
 		printf("%d. ", i);
-		printf("%.2f %c %.2f %c %.2f= ", number_float[0], symbol[1], number_float[1], symbol[1], number_float[1]);
+		printf("%.2f %c %.2f %c %.2f= ", number_float[0], symbol[0], number_float[1], symbol[1], number_float[1]);
 	}
 }
 
@@ -108,7 +108,7 @@ void create_expression2(int i) {
 		}
 		if (decimal == 2) {
 			printf("%d. ", i);
-			printf("( %.2f %c %.2f ) %c %.2f = ", number_float[0], symbol[1], number_float[1], symbol[1], number_float[1]);
+			printf("( %.2f %c %.2f ) %c %.2f = ", number_float[0], symbol[0], number_float[1], symbol[1], number_float[1]);
 		}
 	}
 	if (brackets_place == 1) {
@@ -118,7 +118,7 @@ void create_expression2(int i) {
 		}
 		if (decimal == 2) {
 			printf("%d. ", i);
-			printf("%.2f %c ( %.2f %c %.2f ) = ", number_float[0], symbol[1], number_float[1], symbol[1], number_float[1]);
+			printf("%.2f %c ( %.2f %c %.2f ) = ", number_float[0], symbol[0], number_float[1], symbol[1], number_float[1]);
 		}
 	}
 }
@@ -133,7 +133,7 @@ void create_expression3(int i) {
 				fprintf(fp, "( %d %c %d ) %c %d = ", number_int[0], symbol[0], number_int[1], symbol[1], number_int[2]);
 			}
 			if (decimal == 2) {
-				fprintf(fp, "( %.2f %c %.2f ) %c %.2f = ", number_float[0], symbol[1], number_float[1], symbol[1], number_float[1]);
+				fprintf(fp, "( %.2f %c %.2f ) %c %.2f = ", number_float[0], symbol[0], number_float[1], symbol[1], number_float[1]);
 			}
 		}
 		if (brackets_place == 1) {
@@ -141,7 +141,7 @@ void create_expression3(int i) {
 				fprintf(fp, "%d %c ( %d %c %d ) = ", number_int[0], symbol[0], number_int[1], symbol[1], number_int[2]);
 			}
 			if (decimal == 2) {
-				fprintf(fp, "%.2f %c ( %.2f %c %.2f ) = ", number_float[0], symbol[1], number_float[1], symbol[1], number_float[1]);
+				fprintf(fp, "%.2f %c ( %.2f %c %.2f ) = ", number_float[0], symbol[0], number_float[1], symbol[1], number_float[1]);
 			}
 		}
 	}
@@ -150,7 +150,7 @@ void create_expression3(int i) {
 			fprintf(fp, "%d %c %d %c %d= ", number_int[0], symbol[0], number_int[1], symbol[1], number_int[2]);
 		}
 		if (decimal == 2) {
-			fprintf(fp, "%.2f %c %.2f %c %.2f= ", number_float[0], symbol[1], number_float[1], symbol[1], number_float[1]);
+			fprintf(fp, "%.2f %c %.2f %c %.2f= ", number_float[0], symbol[0], number_float[1], symbol[1], number_float[1]);
 		}
 	}
 	fprintf(fp, "\n");
@@ -175,6 +175,7 @@ int main() {
 		printf("不能打开文件！\n");
 		exit(0);
 	}
+	srand((unsigned)time(NULL));
 	for (int j = 1; j <= num; j++) {
 		randnumber();
 		randsymbol();
